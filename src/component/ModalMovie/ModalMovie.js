@@ -1,8 +1,25 @@
 import Modal from 'react-bootstrap/Modal';
 import {Button} from 'react-bootstrap';
+import axios from 'axios';
 
 
 function ModalMovie({show,cardInfo , handleClose }){
+
+    //  console.log(cardInfo);
+    const addFav = async () =>{
+        let fav={title:cardInfo.title,
+            poster_path:cardInfo.poster_path,
+            release_date:cardInfo.release_date,
+            overview:cardInfo.overview}
+
+            await axios.post(`http://localhost:3002/addMovie`,fav)
+                       .then(()=>{
+                         console.log('done (:');
+                       }).catch((err)=>{
+                           console.log(err);
+                       })
+    }
+
     return(
         <>
         <Modal show={show} onHide={handleClose} animation={false}>
@@ -18,7 +35,12 @@ function ModalMovie({show,cardInfo , handleClose }){
                     </div>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="primary"> Add To Favorite </Button>
+                    <Button variant="primary"
+                    onClick={()=>{
+                        addFav();
+                        handleClose();
+                    }}
+                    > Add To Favorite </Button>
                 </Modal.Footer>
             </Modal>
         </>
