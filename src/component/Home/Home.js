@@ -14,7 +14,7 @@ function Home() {
  
 
     const getTrinding = async()=>{
-        return await axios.get(`https://movie00-app.herokuapp.com/trending`)
+        return await axios.get(`http://localhost:3002/trending`)
                            .then(result=>{
                             //    console.log(result.data)
                                return result.data;
@@ -36,7 +36,7 @@ function Home() {
 
     return (
         <>
-        <Navbar1/>
+       
         <Routes>
             {/* <Route path='/' exact element={<} /> */}
             <Route path='/fav' exact element={<FavList/>} />
